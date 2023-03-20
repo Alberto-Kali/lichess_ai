@@ -4,14 +4,27 @@ import PIL
 import time
 import cv2
 
+board = [['','','','','','','',''],
+         ['','','','','','','',''],
+         ['','','','','','','',''],
+         ['','','','','','','',''],
+         ['','','','','','','',''],
+         ['','','','','','','',''],
+         ['','','','','','','',''],
+         ['','','','','','','',''],]
+
+def detect():
+    pass
+
 while True:
+    move = np.array(ps.grab(bbox=(870, 510, 1000, 530)))
     frame = np.array(ps.grab(bbox=(481, 160, 865, 546)))
     # Load the chess board and chess piece images
     img_board = frame
     img_piece = cv2.imread('./figures/e.png', cv2.IMREAD_UNCHANGED)
 
     mask = img_piece[:,:,3] # use the inverted transparency channel for mask
-
+ 
 
     # Convert both images to grayscale
     img_board_gray = cv2.cvtColor(img_board, cv2.COLOR_BGR2GRAY)
@@ -52,6 +65,7 @@ while True:
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
 
     # Show the result
+    cv2.imshow('move', move)
     cv2.imshow('Result', img_board)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
